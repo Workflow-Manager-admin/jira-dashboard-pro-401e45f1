@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import LoadingSpinner from '../common/LoadingSpinner';
 import './LoginPage.css';
@@ -50,6 +51,9 @@ const LoginPage = () => {
     }
   };
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError('');
@@ -61,11 +65,16 @@ const LoginPage = () => {
     setIsLoading(true);
     try {
       const result = await login(formData);
-      if (!result.success) {
+      if (result.success) {
+        // Redirect to the originally requested URL or dashboard
+        const from = location.state?.from?.pathname || '/dashboard';
+        navigate(from, { replace: true });
+      } else {
         setSubmitError(result.message || 'Login failed. Please check your credentials.');
       }
     } catch (error) {
       setSubmitError('An error occurred during login. Please try again.');
+      console.error('Login error:', error);
     } finally {
       setIsLoading(false);
     }

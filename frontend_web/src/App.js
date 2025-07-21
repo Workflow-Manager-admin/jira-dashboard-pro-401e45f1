@@ -1,6 +1,6 @@
 import React from 'react';
 import Dashboard from './components/dashboard/Dashboard';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginPage from './components/auth/LoginPage';
 import Layout from './components/layout/Layout';
@@ -9,13 +9,26 @@ import './App.css';
 
 // Protected route wrapper component
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, loading, user } = useAuth();
+  const location = useLocation();
 
+  // Show loading spinner while checking authentication
   if (loading) {
     return <div className="loading-container"><LoadingSpinner size="large" /></div>;
   }
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  // If not authenticated, redirect to login while preserving the attempted URL
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Extra validation that user object exists when authenticated
+  if (isAuthenticated && !user) {
+    console.error('Authentication state mismatch: isAuthenticated true but no user');
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
 const App = () => {
