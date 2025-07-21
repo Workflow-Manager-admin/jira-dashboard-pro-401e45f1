@@ -58,8 +58,16 @@
   transition: color 0.3s ease;
 }
 
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
 .theme-toggle {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   background-color: var(--button-bg);
@@ -72,6 +80,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 
 .theme-toggle:hover {
