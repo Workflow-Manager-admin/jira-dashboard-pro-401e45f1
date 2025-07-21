@@ -1,4 +1,5 @@
 import React from 'react';
+import Dashboard from './components/dashboard/Dashboard';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginPage from './components/auth/LoginPage';
@@ -39,8 +40,7 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <Layout>
-                    {/* Dashboard component will be added later */}
-                    <div>Dashboard (Coming Soon)</div>
+                    <Dashboard />
                   </Layout>
                 </ProtectedRoute>
               }
