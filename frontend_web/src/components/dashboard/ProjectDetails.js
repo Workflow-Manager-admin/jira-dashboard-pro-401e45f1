@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { projects } from '../../utils/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 import './ProjectDetails.css';
@@ -42,19 +43,36 @@ const ProjectDetails = ({ project, onClose }) => {
     fetchDetails();
   }, [fetchDetails]);
 
+  const { t } = useTranslation();
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState(null);
+
   const handleExport = async () => {
     try {
+      setExporting(true);
+      setExportError(null);
       const blob = await projects.exportData(project.key);
-      const url = window.URL.createObjectURL(blob);
+      
+      // Create filename with timestamp
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+      const filename = `${project.key}-data-${timestamp}.csv`;
+      
+      // Create download link and trigger download
+      const url = window.URL.createObjectURL(new Blob([blob], { type: 'text/csv' }));
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${project.key}-data.csv`;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
+      
+      // Cleanup
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err) {
       console.error('Error exporting project data:', err);
+      setExportError(t('project.exportError'));
+    } finally {
+      setExporting(false);
     }
   };
 
@@ -301,11 +319,24 @@ const ProjectDetails = ({ project, onClose }) => {
             <div className="details-actions">
               <button 
                 onClick={handleExport} 
-                className="export-button"
-                aria-label="Export project data to CSV"
+                className={`export-button ${exporting ? 'loading' : ''}`}
+                disabled={exporting}
+                aria-label={t('project.exportButtonLabel')}
               >
-                Export to CSV
+                {exporting ? (
+                  <>
+                    <LoadingSpinner size="small" />
+                    <span className="button-text">{t('project.exporting')}</span>
+                  </>
+                ) : (
+                  t('common.export')
+                )}
               </button>
+              {exportError && (
+                <div className="export-error" role="alert">
+                  {exportError}
+                </div>
+              )}
               {project.url && (
                 <a 
                   href={project.url} 

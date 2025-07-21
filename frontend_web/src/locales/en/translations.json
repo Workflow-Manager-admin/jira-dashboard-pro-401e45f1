@@ -5,6 +5,9 @@
     "close": "Close",
     "export": "Export to CSV",
     "viewInJira": "View in Jira",
+    "exporting": "Exporting...",
+    "exportError": "Failed to export project data. Please try again.",
+    "exportButtonLabel": "Export project data to CSV",
     "search": "Search",
     "noResults": "No results found",
     "allTypes": "All Types"
