@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import LoadingSpinner from '../common/LoadingSpinner';
 import './LoginPage.css';
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
@@ -17,17 +19,17 @@ const LoginPage = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('auth.requiredField');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('auth.invalidEmail');
     }
     if (!formData.api_token) {
-      newErrors.api_token = 'API token is required';
+      newErrors.api_token = t('auth.requiredField');
     }
     if (!formData.domain) {
-      newErrors.domain = 'Domain is required';
+      newErrors.domain = t('auth.requiredField');
     } else if (!/^[a-zA-Z0-9-]+\.atlassian\.net$/.test(formData.domain)) {
-      newErrors.domain = 'Please enter a valid Atlassian domain (e.g., company.atlassian.net)';
+      newErrors.domain = t('auth.invalidDomain');
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -72,25 +74,25 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1 className="login-title">Jira Dashboard</h1>
-        <p className="login-subtitle">Sign in with your Jira account</p>
+        <h1 className="login-title">{t('auth.loginTitle')}</h1>
+        <p className="login-subtitle">{t('auth.loginSubtitle')}</p>
 
         {submitError && (
           <div className="error-message" role="alert">
-            {submitError}
+            {t('auth.loginFailed')}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t('auth.email')}</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="your.email@company.com"
+              placeholder={t('auth.emailPlaceholder')}
               className={errors.email ? 'error' : ''}
               aria-invalid={errors.email ? 'true' : 'false'}
               aria-describedby={errors.email ? 'email-error' : undefined}
@@ -105,14 +107,14 @@ const LoginPage = () => {
 
           <div className="form-group">
             <label htmlFor="api_token">
-              API Token
+              {t('auth.apiToken')}
               <a
                 href="https://id.atlassian.com/manage/api-tokens"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="token-link"
               >
-                Get Token
+                {t('auth.getToken')}
               </a>
             </label>
             <input
@@ -121,7 +123,7 @@ const LoginPage = () => {
               name="api_token"
               value={formData.api_token}
               onChange={handleChange}
-              placeholder="Your Jira API token"
+              placeholder={t('auth.apiTokenPlaceholder')}
               className={errors.api_token ? 'error' : ''}
               aria-invalid={errors.api_token ? 'true' : 'false'}
               aria-describedby={errors.api_token ? 'token-error' : undefined}
@@ -135,14 +137,14 @@ const LoginPage = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="domain">Domain</label>
+            <label htmlFor="domain">{t('auth.domain')}</label>
             <input
               type="text"
               id="domain"
               name="domain"
               value={formData.domain}
               onChange={handleChange}
-              placeholder="company.atlassian.net"
+              placeholder={t('auth.domainPlaceholder')}
               className={errors.domain ? 'error' : ''}
               aria-invalid={errors.domain ? 'true' : 'false'}
               aria-describedby={errors.domain ? 'domain-error' : undefined}
@@ -161,7 +163,7 @@ const LoginPage = () => {
             disabled={isLoading}
             aria-busy={isLoading}
           >
-            {isLoading ? <LoadingSpinner size="small" /> : 'Sign In'}
+            {isLoading ? <LoadingSpinner size="small" /> : t('auth.login')}
           </button>
         </form>
       </div>

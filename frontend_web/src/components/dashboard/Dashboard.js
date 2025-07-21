@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { projects } from '../../utils/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 import ProjectCard from './ProjectCard';
@@ -6,6 +7,7 @@ import ProjectDetails from './ProjectDetails';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const [projectList, setProjectList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +30,7 @@ const Dashboard = () => {
       const types = new Set(data.map(project => project.project_type_key));
       setProjectTypes(types);
     } catch (err) {
-      setError('Failed to fetch projects. Please try again later.');
+      setError(t('common.error'));
       console.error('Error fetching projects:', err);
     } finally {
       setLoading(false);
@@ -65,23 +67,23 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1>Projects Dashboard</h1>
+        <h1>{t('dashboard.title')}</h1>
         <div className="dashboard-filters">
           <input
             type="text"
-            placeholder="Search projects..."
+            placeholder={t('dashboard.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
-            aria-label="Search projects"
+            aria-label={t('common.search')}
           />
           <select
             value={projectTypeFilter}
             onChange={(e) => setProjectTypeFilter(e.target.value)}
             className="type-filter"
-            aria-label="Filter by project type"
+            aria-label={t('dashboard.filterByType')}
           >
-            <option value="">All Types</option>
+            <option value="">{t('common.allTypes')}</option>
             {Array.from(projectTypes).map(type => (
               <option key={type} value={type}>
                 {type.replace('_', ' ').toUpperCase()}
@@ -94,7 +96,7 @@ const Dashboard = () => {
       <div className="projects-grid">
         {filteredProjects.length === 0 ? (
           <div className="no-projects">
-            No projects found matching your criteria
+            {t('dashboard.noProjects')}
           </div>
         ) : (
           filteredProjects.map(project => (

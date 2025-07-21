@@ -1,0 +1,63 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "close": "Close",
+    "export": "Export to CSV",
+    "viewInJira": "View in Jira",
+    "search": "Search",
+    "noResults": "No results found",
+    "allTypes": "All Types"
+  },
+  "auth": {
+    "login": "Sign In",
+    "logout": "Logout",
+    "loginTitle": "Jira Dashboard",
+    "loginSubtitle": "Sign in with your Jira account",
+    "email": "Email",
+    "emailPlaceholder": "your.email@company.com",
+    "apiToken": "API Token",
+    "apiTokenPlaceholder": "Your Jira API token",
+    "getToken": "Get Token",
+    "domain": "Domain",
+    "domainPlaceholder": "company.atlassian.net",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidDomain": "Please enter a valid Atlassian domain (e.g., company.atlassian.net)",
+    "requiredField": "This field is required"
+  },
+  "dashboard": {
+    "title": "Projects Dashboard",
+    "searchPlaceholder": "Search projects...",
+    "filterByType": "Filter by project type",
+    "noProjects": "No projects found matching your criteria",
+    "statistics": {
+      "totalIssues": "Total Issues",
+      "openIssues": "Open",
+      "inProgress": "In Progress",
+      "resolved": "Resolved"
+    }
+  },
+  "project": {
+    "details": "Project Details",
+    "overview": "Overview",
+    "noDescription": "No description available",
+    "projectLead": "Project Lead",
+    "projectType": "Project Type",
+    "components": "Components",
+    "versions": "Versions",
+    "statistics": {
+      "title": "Issue Statistics",
+      "priorityDistribution": "Priority Distribution",
+      "issueTypes": "Issue Types"
+    },
+    "status": {
+      "released": "Released",
+      "unreleased": "Unreleased"
+    }
+  },
+  "language": {
+    "en": "English",
+    "es": "Español"
+  }
+}

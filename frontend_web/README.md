@@ -27,7 +27,19 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Customization
+## Internationalization (i18n)
+
+The application supports multiple languages through react-i18next. Currently supported languages:
+- English (en)
+- Spanish (es)
+
+### Adding New Languages
+
+1. Create a new translation file in `src/locales/<language-code>/translations.json`
+2. Add the language option in the LanguageSwitcher component
+3. Add translations for all keys following the same structure as existing translation files
+
+### Customization
 
 ### Colors
 

@@ -1,0 +1,63 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Se produjo un error",
+    "close": "Cerrar",
+    "export": "Exportar a CSV",
+    "viewInJira": "Ver en Jira",
+    "search": "Buscar",
+    "noResults": "No se encontraron resultados",
+    "allTypes": "Todos los tipos"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "loginTitle": "Panel de Jira",
+    "loginSubtitle": "Inicie sesión con su cuenta de Jira",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu.correo@empresa.com",
+    "apiToken": "Token API",
+    "apiTokenPlaceholder": "Tu token API de Jira",
+    "getToken": "Obtener Token",
+    "domain": "Dominio",
+    "domainPlaceholder": "empresa.atlassian.net",
+    "loginFailed": "Error de inicio de sesión. Por favor, verifica tus credenciales.",
+    "invalidEmail": "Por favor, ingresa un correo electrónico válido",
+    "invalidDomain": "Por favor, ingresa un dominio válido de Atlassian (ej., empresa.atlassian.net)",
+    "requiredField": "Este campo es obligatorio"
+  },
+  "dashboard": {
+    "title": "Panel de Proyectos",
+    "searchPlaceholder": "Buscar proyectos...",
+    "filterByType": "Filtrar por tipo de proyecto",
+    "noProjects": "No se encontraron proyectos que coincidan con los criterios",
+    "statistics": {
+      "totalIssues": "Total de Incidencias",
+      "openIssues": "Abiertas",
+      "inProgress": "En Progreso",
+      "resolved": "Resueltas"
+    }
+  },
+  "project": {
+    "details": "Detalles del Proyecto",
+    "overview": "Resumen",
+    "noDescription": "Sin descripción disponible",
+    "projectLead": "Líder del Proyecto",
+    "projectType": "Tipo de Proyecto",
+    "components": "Componentes",
+    "versions": "Versiones",
+    "statistics": {
+      "title": "Estadísticas de Incidencias",
+      "priorityDistribution": "Distribución por Prioridad",
+      "issueTypes": "Tipos de Incidencias"
+    },
+    "status": {
+      "released": "Publicado",
+      "unreleased": "No publicado"
+    }
+  },
+  "language": {
+    "en": "English",
+    "es": "Español"
+  }
+}
